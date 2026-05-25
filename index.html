@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Юлия Рыбакова — Внешний директор по продукту</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --bg:       #0A0908;
+  --bg2:      #111009;
+  --bg3:      #161410;
+  --ivory:    #EDE8DF;
+  --dim:      #7A7468;
+  --faint:    rgba(237,232,223,0.06);
+  --line:     rgba(237,232,223,0.09);
+  --amber:    #C4813F;
+  --amber2:   #D8975A;
+  --amber-bg: rgba(196,129,63,0.10);
+  --serif:    'Cormorant Garamond', Georgia, serif;
+  --sans:     'Inter', system-ui, sans-serif;
+  --r:        0px;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ivory); font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* ── UTILS ── */
+.serif      { font-family: var(--serif); }
+.amber      { color: var(--amber); }
+.dim        { color: var(--dim); }
+.container  { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+.eyebrow    { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); display: flex; align-items: center; gap: 10px; }
+.eyebrow::before { content:''; display:block; width:28px; height:1px; background: var(--amber); flex-shrink:0; }
+h2.title    { font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 300; line-height: 1.1; letter-spacing: -.01em; margin-top: 1.25rem; }
+h2.title em { font-style: italic; color: var(--amber2); }
+
+/* ── ANIMATIONS ── */
+.reveal { opacity:0; transform:translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.in { opacity:1; transform:translateY(0); }
+.reveal-d1 { transition-delay: .1s; }
+.reveal-d2 { transition-delay: .2s; }
+.reveal-d3 { transition-delay: .3s; }
+
+/* ════════════════════════════════
+   NAV
+════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(18px) saturate(120%);
+  background: rgba(10,9,8,.75);
+  transition: padding .3s;
+}
+.nav-logo {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
+  letter-spacing: .06em; color: var(--ivory); text-decoration: none;
+}
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a {
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--dim); text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover { color: var(--ivory); }
+.nav-tg {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--amber); border: 1px solid var(--amber);
+  padding: 9px 20px; text-decoration: none; transition: all .25s;
+}
+.nav-tg:hover { background: var(--amber); color: var(--bg); }
+.nav-tg svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+/* ════════════════════════════════
+   HERO
+════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-glow {
+  position:absolute; top:-20%; right:-10%; width:55%; height:80%;
+  background: radial-gradient(ellipse at center, rgba(196,129,63,.07) 0%, transparent 65%);
+  pointer-events:none;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 40px 80px 48px;
+  position: relative; z-index: 1;
+}
+.hero-tag { margin-bottom: 40px; }
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(4rem, 7.5vw, 7.5rem);
+  font-weight: 300; line-height: .95;
+  letter-spacing: -.02em;
+  margin-bottom: 12px;
+}
+.hero-name em { font-style: italic; color: var(--amber2); display: block; }
+.hero-role {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.2rem, 2.2vw, 1.9rem); font-weight: 300;
+  color: var(--dim); margin-bottom: 36px; line-height: 1.35;
+}
+.hero-pitch {
+  font-size: .97rem; color: var(--dim); max-width: 460px;
+  line-height: 1.75; margin-bottom: 48px;
+}
+.hero-pitch strong { color: var(--ivory); font-weight: 400; }
+.hero-btns { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.btn-main {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--amber); color: var(--bg);
+  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  padding: 14px 28px; text-decoration: none; transition: background .2s;
+}
+.btn-main:hover { background: var(--amber2); }
+.btn-main svg { width: 16px; height: 16px; fill: currentColor; flex-shrink:0; }
+.btn-down {
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--dim); text-decoration: none;
+  display: flex; align-items: center; gap: 6px; transition: color .2s;
+}
+.btn-down:hover { color: var(--ivory); }
+
+.hero-right {
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end;
+  padding: 80px 48px 80px 24px;
+  position: relative; z-index: 1;
+  gap: 2px;
+}
+.h-stat {
+  width: 100%; max-width: 240px;
+  padding: 22px 0; border-top: 1px solid var(--line);
+}
+.h-stat:last-child { border-bottom: 1px solid var(--line); }
+.h-stat-n {
+  font-family: var(--serif); font-size: 3.4rem; font-weight: 300;
+  line-height: 1; color: var(--ivory); letter-spacing: -.02em;
+}
+.h-stat-n sup { font-size: 1.6rem; color: var(--amber); vertical-align: super; }
+.h-stat-l { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-top: 4px; }
+
+/* ════════════════════════════════
+   TICKER
+════════════════════════════════ */
+.ticker {
+  overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding: 14px 0; white-space: nowrap; background: var(--bg2);
+}
+.ticker-track { display: inline-flex; gap: 48px; animation: roll 28s linear infinite; }
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item { font-family: var(--serif); font-size: 1.05rem; font-style: italic; color: var(--dim); }
+.ticker-dot  { color: var(--amber); font-style: normal; }
+@keyframes roll { 0%{ transform:translateX(0) } 100%{ transform:translateX(-50%) } }
+
+/* ════════════════════════════════
+   POSITIONING BLOCK
+════════════════════════════════ */
+#position { padding: 100px 0; }
+.pos-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.pos-left {}
+.pos-copy { font-size: 1rem; color: var(--dim); line-height: 1.8; margin-top: 1.5rem; max-width: 440px; }
+.pos-copy p { margin-bottom: 1.2rem; }
+.pos-copy strong { color: var(--ivory); font-weight: 400; }
+.pos-right { padding-top: 60px; }
+.diff-list { display: flex; flex-direction: column; }
+.diff-item {
+  display: grid; grid-template-columns: 36px 1fr; gap: 16px;
+  padding: 20px 0; border-bottom: 1px solid var(--line); align-items: start;
+}
+.diff-item:first-child { border-top: 1px solid var(--line); }
+.diff-n { font-family: var(--serif); font-size: .8rem; color: var(--amber); padding-top: 2px; }
+.diff-body {}
+.diff-title { font-size: .9rem; color: var(--ivory); margin-bottom: 4px; font-weight: 400; }
+.diff-desc { font-size: .82rem; color: var(--dim); line-height: 1.55; }
+
+/* ════════════════════════════════
+   SERVICES
+════════════════════════════════ */
+#services { padding: 100px 0; background: var(--bg2); }
+.svc-header { margin-bottom: 56px; }
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.svc-card {
+  background: var(--faint); padding: 44px 36px;
+  position: relative; overflow: hidden;
+  transition: background .25s;
+}
+.svc-card:hover { background: rgba(237,232,223,.05); }
+.svc-card::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: var(--amber); transform:scaleX(0); transform-origin:left;
+  transition: transform .4s ease;
+}
+.svc-card:hover::after { transform: scaleX(1); }
+.svc-idx {
+  font-family: var(--serif); font-size: 5rem; font-weight: 300;
+  color: rgba(237,232,223,.04); line-height: 1; letter-spacing: -.03em;
+  margin-bottom: -8px;
+}
+.svc-title {
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 400;
+  color: var(--ivory); line-height: 1.2; margin-bottom: 14px;
+}
+.svc-for { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; }
+.svc-desc { font-size: .86rem; color: var(--dim); line-height: 1.65; margin-bottom: 24px; }
+.svc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.svc-list li {
+  font-size: .82rem; color: var(--dim); padding-left: 14px;
+  position: relative; line-height: 1.5;
+}
+.svc-list li::before { content:'—'; position:absolute; left:0; color:var(--amber); }
+.svc-price {
+  margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line);
+  font-family: var(--serif); font-style: italic; font-size: .95rem; color: var(--amber2);
+}
+.svc-price span { display: block; font-style: normal; font-family: var(--sans); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-top: 2px; }
+
+/* ════════════════════════════════
+   CASES
+════════════════════════════════ */
+#cases { padding: 100px 0; }
+.cases-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; }
+.cases-note { font-size: .9rem; color: var(--dim); max-width: 320px; line-height: 1.6; }
+.case-row {
+  display: grid; grid-template-columns: 100px 1fr 160px;
+  gap: 32px; padding: 32px 0; border-top: 1px solid var(--line);
+  align-items: start; transition: background .2s;
+}
+.case-row:last-child { border-bottom: 1px solid var(--line); }
+.case-co {
+  font-family: var(--serif); font-style: italic; font-size: .85rem;
+  color: var(--amber); padding-top: 4px; line-height: 1.3;
+}
+.case-year { font-size: 10px; letter-spacing: .1em; color: var(--dim); margin-top: 4px; }
+.case-title {
+  font-family: var(--serif); font-size: 1.3rem; font-weight: 400;
+  color: var(--ivory); margin-bottom: 10px; line-height: 1.25;
+}
+.case-text { font-size: .85rem; color: var(--dim); line-height: 1.6; max-width: 500px; }
+.case-metric { text-align: right; }
+.met-val {
+  font-family: var(--serif); font-size: 2.3rem; font-weight: 300;
+  line-height: 1; color: var(--amber2); white-space: nowrap;
+  letter-spacing: -.01em;
+}
+.met-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-top: 6px; }
+
+/* ════════════════════════════════
+   STRIP — LOGOS/COMPANIES
+════════════════════════════════ */
+#strip { background: var(--bg2); padding: 60px 0; }
+.strip-label {
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim);
+  margin-bottom: 36px; display: flex; align-items: center; gap: 10px;
+}
+.strip-label::before { content:''; display:block; width:28px; height:1px; background:var(--dim); }
+.co-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; }
+.co-cell {
+  padding: 24px 16px; text-align: center;
+  border: 1px solid transparent; transition: border-color .2s;
+  cursor: default;
+}
+.co-cell:hover { border-color: var(--line); }
+.co-name { font-family: var(--serif); font-size: 1rem; color: var(--dim); letter-spacing: .02em; transition: color .2s; }
+.co-cell:hover .co-name { color: var(--ivory); }
+.co-role { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(122,116,104,.5); margin-top: 4px; }
+
+/* ════════════════════════════════
+   AI BLOCK
+════════════════════════════════ */
+#ai {
+  display: grid; grid-template-columns: 1fr 1fr; min-height: 480px;
+}
+.ai-l {
+  background: var(--amber); padding: 72px 48px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.ai-l .eyebrow { color: rgba(10,9,8,.55); }
+.ai-l .eyebrow::before { background: rgba(10,9,8,.4); }
+.ai-l h2 {
+  font-family: var(--serif); font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: 400; color: var(--bg); line-height: 1.15;
+  margin-top: 1rem; margin-bottom: 1.5rem;
+}
+.ai-l p { font-size: .95rem; color: rgba(10,9,8,.68); line-height: 1.7; max-width: 380px; }
+.ai-demo {
+  margin-top: 28px; background: rgba(10,9,8,.12);
+  padding: 18px 22px; font-family: var(--serif); font-style: italic;
+  font-size: 1.05rem; color: var(--bg); line-height: 1.5;
+  border-left: 3px solid rgba(10,9,8,.25);
+}
+.ai-r {
+  background: var(--bg3); padding: 72px 48px;
+  display: flex; flex-direction: column; justify-content: center;
+  border-left: 1px solid var(--line);
+}
+.ai-r .eyebrow { margin-bottom: 28px; }
+.tool-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; border-bottom: 1px solid var(--line);
+}
+.tool-row:first-of-type { border-top: 1px solid var(--line); }
+.tool-n { font-size: .93rem; color: var(--ivory); }
+.tool-t { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
+
+/* ════════════════════════════════
+   TEACHING
+════════════════════════════════ */
+#teaching { padding: 100px 0; }
+.teach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.teach-copy { font-size: .97rem; color: var(--dim); line-height: 1.8; margin-top: 1.5rem; max-width: 420px; }
+.teach-copy p { margin-bottom: 1.2rem; }
+.teach-copy strong { color: var(--ivory); font-weight: 400; }
+.edu-list { padding-top: 56px; }
+.edu-row {
+  display: grid; grid-template-columns: 1fr auto; gap: 20px;
+  padding: 20px 0; border-bottom: 1px solid var(--line); align-items: start;
+}
+.edu-row:first-child { border-top: 1px solid var(--line); }
+.edu-title { font-family: var(--serif); font-size: 1rem; color: var(--ivory); margin-bottom: 4px; font-weight: 400; }
+.edu-org { font-size: .78rem; color: var(--dim); letter-spacing: .02em; }
+.edu-yr { font-family: var(--serif); font-style: italic; font-size: .85rem; color: var(--amber); white-space: nowrap; padding-top: 2px; }
+
+/* ════════════════════════════════
+   FOR WHOM
+════════════════════════════════ */
+#forwhom { padding: 100px 0; background: var(--bg2); }
+.fw-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.fw-left h2 { margin-bottom: 20px; }
+.fw-left p { font-size: .97rem; color: var(--dim); line-height: 1.75; max-width: 400px; margin-bottom: 28px; }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-size: 11px; letter-spacing: .06em; color: var(--dim);
+  border: 1px solid var(--line); padding: 6px 14px;
+  transition: all .2s; cursor: default;
+}
+.tag:hover { border-color: var(--amber); color: var(--amber); }
+.fw-list { display: flex; flex-direction: column; }
+.fw-row {
+  display: grid; grid-template-columns: 24px 1fr; gap: 16px;
+  padding: 18px 0; border-bottom: 1px solid var(--line); align-items: start;
+}
+.fw-row:first-child { border-top: 1px solid var(--line); }
+.fw-dash { font-family: var(--serif); color: var(--amber); font-size: .8rem; padding-top: 2px; }
+.fw-text { font-size: .88rem; color: var(--dim); line-height: 1.55; }
+.fw-text strong { color: var(--ivory); font-weight: 400; }
+
+/* ════════════════════════════════
+   NUMBERS STRIP
+════════════════════════════════ */
+.nums { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+.num-cell { padding: 52px 40px; text-align: center; border-right: 1px solid var(--line); }
+.num-cell:last-child { border-right: none; }
+.num-v { font-family: var(--serif); font-size: 4rem; font-weight: 300; line-height: 1; letter-spacing: -.02em; }
+.num-v sup { font-size: 2rem; color: var(--amber); vertical-align: super; }
+.num-l { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-top: 8px; }
+
+/* ════════════════════════════════
+   CTA
+════════════════════════════════ */
+#cta {
+  padding: 120px 0; text-align: center; position: relative; overflow: hidden;
+}
+.cta-blob {
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 50% 70% at 50% 50%, rgba(196,129,63,.08) 0%, transparent 65%);
+  pointer-events:none;
+}
+#cta .eyebrow { justify-content: center; }
+#cta h2 { max-width: 680px; margin: 1.25rem auto 1rem; text-align: center; font-size: clamp(2.8rem, 5vw, 5rem); }
+#cta p { font-size: 1rem; color: var(--dim); max-width: 420px; margin: 0 auto 48px; line-height: 1.7; }
+.cta-main {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--amber); color: var(--bg);
+  font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  padding: 18px 36px; text-decoration: none; transition: background .2s;
+}
+.cta-main:hover { background: var(--amber2); }
+.cta-main svg { width: 18px; height: 18px; fill: currentColor; }
+.cta-sub { margin-top: 24px; font-size: 11px; color: var(--dim); letter-spacing: .06em; }
+.cta-sub a { color: var(--amber); text-decoration: none; }
+.cta-sub a:hover { color: var(--amber2); }
+
+/* ════════════════════════════════
+   FOOTER
+════════════════════════════════ */
+footer {
+  padding: 28px 48px; border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--bg2);
+}
+.ft-name { font-family: var(--serif); font-size: .95rem; color: var(--dim); }
+.ft-links { display: flex; gap: 28px; }
+.ft-links a { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color .2s; }
+.ft-links a:hover { color: var(--amber); }
+.ft-copy { font-size: 10px; letter-spacing: .1em; color: rgba(122,116,104,.4); }
+
+/* ════════════════════════════════
+   RESPONSIVE
+════════════════════════════════ */
+@media (max-width: 960px) {
+  nav { padding: 16px 24px; }
+  nav .nav-links { display: none; }
+  .container { padding: 0 24px; }
+  #hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 60px 24px; }
+  .pos-inner, .teach-grid, .fw-inner, #ai { grid-template-columns: 1fr; }
+  .ai-l, .ai-r { padding: 48px 24px; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .co-grid { grid-template-columns: repeat(3, 1fr); }
+  .nums { grid-template-columns: repeat(2, 1fr); }
+  .case-row { grid-template-columns: 1fr; gap: 12px; }
+  .case-metric { text-align: left; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <a href="#" class="nav-logo">Юлия Рыбакова</a>
+  <ul class="nav-links">
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#cases">Кейсы</a></li>
+    <li><a href="#teaching">Преподавание</a></li>
+    <li><a href="#forwhom">Для кого</a></li>
+  </ul>
+  <a href="https://t.me/IuliiaRybakova" target="_blank" class="nav-tg">
+    <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.18-2.01 9.47c-.15.68-.54.84-1.09.52l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.21-3.03 5.51-4.97c.24-.21-.05-.33-.37-.12l-6.8 4.28-2.93-.91c-.64-.2-.65-.64.13-.95l11.43-4.41c.53-.19 1 .13.98.63z"/></svg>
+    Написать
+  </a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-left reveal">
+    <div class="eyebrow hero-tag">Продуктовый консалтинг · Москва</div>
+    <h1 class="hero-name">Юлия<em>Рыбакова</em></h1>
+    <div class="hero-role">
+      Внешний директор по продукту.<br>Прихожу, делаю руками, строю функцию.
+    </div>
+    <p class="hero-pitch">
+      <strong>9+ лет в продукте</strong> — от стартапа до Raiffeisenbank с 2M+ MAU.
+      Запускала продукты с нуля до монетизации в 8 странах.
+      Обучила <strong>45+ потоков</strong> продактов в Нетологии, ВШЭ, MBA.
+      Теперь помогаю <strong>tech-компаниям 50–500 чел.</strong> выстроить продуктовую функцию —
+      без академических теоретиков и слайдов ни о чём.
+    </p>
+    <div class="hero-btns">
+      <a href="https://t.me/IuliiaRybakova" target="_blank" class="btn-main">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.18-2.01 9.47c-.15.68-.54.84-1.09.52l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.21-3.03 5.51-4.97c.24-.21-.05-.33-.37-.12l-6.8 4.28-2.93-.91c-.64-.2-.65-.64.13-.95l11.43-4.41c.53-.19 1 .13.98.63z"/></svg>
+        Написать в Telegram
+      </a>
+      <a href="#cases" class="btn-down">Смотреть кейсы ↓</a>
+    </div>
+  </div>
+  <div class="hero-right reveal reveal-d2">
+    <div class="h-stat"><div class="h-stat-n">9<sup>+</sup></div><div class="h-stat-l">Лет в продукте</div></div>
+    <div class="h-stat"><div class="h-stat-n">2M<sup>+</sup></div><div class="h-stat-l">MAU под управлением</div></div>
+    <div class="h-stat"><div class="h-stat-n">45<sup>+</sup></div><div class="h-stat-l">Потоков студентов</div></div>
+    <div class="h-stat"><div class="h-stat-n">8</div><div class="h-stat-l">Стран команды в Keenetic</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ TICKER ═══════════ -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Raiffeisenbank</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">OTP Bank</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Keenetic</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">CDNvideo</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">НСК / НРА</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">ВШЭ</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">MBA РАНХиГС</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Нетология</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">МФТИ × Coursera</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Лукойл</span><span class="ticker-dot"> · </span>
+    <!-- duplicate -->
+    <span class="ticker-item">Raiffeisenbank</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">OTP Bank</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Keenetic</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">CDNvideo</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">НСК / НРА</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">ВШЭ</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">MBA РАНХиГС</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Нетология</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">МФТИ × Coursera</span><span class="ticker-dot"> · </span>
+    <span class="ticker-item">Лукойл</span><span class="ticker-dot"> · </span>
+  </div>
+</div>
+
+<!-- ═══════════ POSITIONING ═══════════ -->
+<section id="position">
+  <div class="container">
+    <div class="pos-inner">
+      <div class="pos-left reveal">
+        <div class="eyebrow">Почему я</div>
+        <h2 class="title">Не консультант.<br>Не тренер.<br><em>Практик,</em><br>который строит.</h2>
+        <div class="pos-copy">
+          <p>Большинство консультантов по продукту — это либо <strong>академические теоретики</strong> с красивыми фреймворками, либо <strong>ex-менеджеры из крупняка</strong>, которые давно не делали руками.</p>
+          <p>Я начинала как инженер-физик. Ушла в продукт, потому что интереснее всего — <strong>стык технологии и человека.</strong> За 9 лет запустила продукты от идеи до монетизации в банках, SaaS и медиа.</p>
+          <p>Параллельно — преподаю. ВШЭ, MBA, Нетология, МФТИ. Потому что <strong>лучший способ разобраться — научить другого.</strong> И потому что управленцы заслуживают живых примеров, а не кейсов 2015 года.</p>
+        </div>
+      </div>
+      <div class="pos-right reveal reveal-d1">
+        <div class="diff-list">
+          <div class="diff-item">
+            <div class="diff-n">01</div>
+            <div class="diff-body">
+              <div class="diff-title">Технический бэкграунд</div>
+              <div class="diff-desc">Инженер-физик → аспирантура → продукт. Разговариваю с командой разработки на одном языке. Не нужен переводчик между бизнесом и IT.</div>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-n">02</div>
+            <div class="diff-body">
+              <div class="diff-title">Финтех + SaaS + медиа</div>
+              <div class="diff-desc">Raiffeisen, OTP, Keenetic, CDNvideo — разные индустрии, разные масштабы, разные ставки. Не stuck в одной отрасли.</div>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-n">03</div>
+            <div class="diff-body">
+              <div class="diff-title">Делаю и обучаю одновременно</div>
+              <div class="diff-desc">Консалтинг и преподавание — не разные жизни. Это одна система: прихожу в компанию, решаю задачу руками и передаю компетенцию команде.</div>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-n">04</div>
+            <div class="diff-body">
+              <div class="diff-title">ИИ — не тренд, а рабочий инструмент</div>
+              <div class="diff-desc">Вайбкодинг, no-code, AI-ассистенты — использую ежедневно. На одном занятии собираю рабочий прототип из идеи участника за 90 минут.</div>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-n">05</div>
+            <div class="diff-body">
+              <div class="diff-title">MBA + стажировка в Китае, 2025</div>
+              <div class="diff-desc">РАНХиГС ИБДА + Southwestern University of Finance and Economics, Чэнду. Стратегический контекст + международный взгляд.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section id="services">
+  <div class="container">
+    <div class="svc-header reveal">
+      <div class="eyebrow">Услуги</div>
+      <h2 class="title">Три формата<br><em>работы</em></h2>
+    </div>
+    <div class="svc-grid reveal reveal-d1">
+
+      <div class="svc-card">
+        <div class="svc-idx">01</div>
+        <div class="svc-for">Для tech-компаний 50–500 чел.</div>
+        <div class="svc-title">Внешний CPO / Product Lead</div>
+        <div class="svc-desc">Встраиваюсь в компанию как руководитель продуктовой функции. Строю процессы, приоритизирую бэклог, формирую команду — и постепенно передаю всё это внутрь.</div>
+        <ul class="svc-list">
+          <li>Аудит и продуктовая стратегия</li>
+          <li>Роудмап и приоритизация с командой</li>
+          <li>Запуск нового продукта или направления</li>
+          <li>Найм и онбординг первого продакта</li>
+          <li>Подготовка к питчу перед инвесторами / СД</li>
+        </ul>
+        <div class="svc-price">от 500 000 ₽ / мес.<span>engagement от 2 месяцев</span></div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-idx">02</div>
+        <div class="svc-for">Для команд и корпоративных заказчиков</div>
+        <div class="svc-title">Корпоративное обучение и воркшопы</div>
+        <div class="svc-desc">Интенсивы для менеджерских команд — от линейных руководителей до топов. Работаю с реальными кейсами вашей компании. Без учебников из прошлого века.</div>
+        <ul class="svc-list">
+          <li>Продуктовое мышление для нетехнических команд</li>
+          <li>ИИ-инструменты в повседневной работе</li>
+          <li>CustDev и исследования — быстро и без воды</li>
+          <li>Вайбкодинг: MVP за вечер без разработчика</li>
+          <li>Форматы: 1 день / 3 дня / серия сессий</li>
+        </ul>
+        <div class="svc-price">от 300 000 ₽ / программа<span>под ключ — от брифа до отчёта</span></div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-idx">03</div>
+        <div class="svc-for">Для собственников и руководителей</div>
+        <div class="svc-title">Стратсессия и менторинг</div>
+        <div class="svc-desc">Глубокая сессия для собственника или СЕО — разобрать идею, проверить гипотезу, расставить приоритеты. Или регулярный менторинг для CPO / Product Manager.</div>
+        <ul class="svc-list">
+          <li>Стратегическая сессия 4–6 часов</li>
+          <li>Валидация продуктовой гипотезы</li>
+          <li>Менторинг CPO / Head of Product</li>
+          <li>Разбор продукта с внешней точки зрения</li>
+        </ul>
+        <div class="svc-price">от 150 000 ₽ / сессия<span>первый звонок — бесплатно</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CASES ═══════════ -->
+<section id="cases">
+  <div class="container">
+    <div class="cases-head reveal">
+      <div>
+        <div class="eyebrow">Кейсы</div>
+        <h2 class="title">Результаты,<br><em>не слова</em></h2>
+      </div>
+      <div class="cases-note">Конкретные проекты с метриками. Не «участвовала» — отвечала за результат.</div>
+    </div>
+    <div class="reveal reveal-d1">
+      <div class="case-row">
+        <div><div class="case-co">Raiffeisenbank</div><div class="case-year">2023 – 2025</div></div>
+        <div>
+          <div class="case-title">Автоматизация страховки — с 2 дней до 1 минуты</div>
+          <div class="case-text">Создание нового сервиса выпуска семейной страховки для Premium-клиентов. Полная автоматизация: убрали контакт-центр из цепочки, перевели в self-service в приложении. Повлияло на NPS, LTV и Gross Income сегмента.</div>
+        </div>
+        <div class="case-metric"><div class="met-val">2д → 1мин</div><div class="met-label">Время выпуска</div></div>
+      </div>
+      <div class="case-row">
+        <div><div class="case-co">Raiffeisenbank</div><div class="case-year">2024</div></div>
+        <div>
+          <div class="case-title">Инвестиционный сервис для всей аудитории банка</div>
+          <div class="case-text">Создание продукта подбора инвестиций (Raiffeisenbank Капитал) и вывод на массовую аудиторию. Метрики: Xsell, LTV, Gross Income. Продукт вошёл в основной мобильный app.</div>
+        </div>
+        <div class="case-metric"><div class="met-val">2M<sup style="font-size:1.1rem;color:var(--amber)">+</sup></div><div class="met-label">MAU продукта</div></div>
+      </div>
+      <div class="case-row">
+        <div><div class="case-co">Keenetic RMM</div><div class="case-year">2021 – 2023</div></div>
+        <div>
+          <div class="case-title">B2B SaaS с нуля — стратегия, команда, монетизация</div>
+          <div class="case-text">Запуск высоконагруженного облачного сервиса для удалённого управления сетевым оборудованием. Полный цикл: vision → роудмап → исследования → релизы → монетизация. Команда 9 человек, 8 стран, 7 часовых поясов.</div>
+        </div>
+        <div class="case-metric"><div class="met-val">0 → $</div><div class="met-label">До монетизации</div></div>
+      </div>
+      <div class="case-row">
+        <div><div class="case-co">Нетология</div><div class="case-year">2020 – 2024</div></div>
+        <div>
+          <div class="case-title">Курс «Продуктовый менеджер» — 4 года, 45+ потоков</div>
+          <div class="case-text">Разработала и вела курс по продуктовому менеджменту. Параллельно — создала курс совместно с МФТИ на платформе Coursera. Один из самых длинных и устойчивых треков в категории на платформе.</div>
+        </div>
+        <div class="case-metric"><div class="met-val">45<sup style="font-size:1.1rem;color:var(--amber)">+</sup></div><div class="met-label">Потоков</div></div>
+      </div>
+      <div class="case-row">
+        <div><div class="case-co">Лукойл</div><div class="case-year">2022</div></div>
+        <div>
+          <div class="case-title">Обучение топ-менеджмента продуктовому подходу</div>
+          <div class="case-text">Серия воркшопов для менеджмента Лукойла — продуктовое мышление, цифровые инструменты, работа с реальными кейсами компании. Не абстрактная теория, а применимые инструменты с первого дня.</div>
+        </div>
+        <div class="case-metric"><div class="met-val">Top</div><div class="met-label">Менеджмент</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ STRIP ═══════════ -->
+<div id="strip">
+  <div class="container">
+    <div class="strip-label">Компании и платформы</div>
+    <div class="co-grid">
+      <div class="co-cell"><div class="co-name">Raiffeisenbank</div><div class="co-role">Principal PM</div></div>
+      <div class="co-cell"><div class="co-name">OTP Bank</div><div class="co-role">Product Owner</div></div>
+      <div class="co-cell"><div class="co-name">Keenetic</div><div class="co-role">CPO / SRO</div></div>
+      <div class="co-cell"><div class="co-name">CDNvideo</div><div class="co-role">PM + Design</div></div>
+      <div class="co-cell"><div class="co-name">НСК / НРА</div><div class="co-role">PM + Design</div></div>
+      <div class="co-cell"><div class="co-name">Элтеза</div><div class="co-role">Product Manager</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ NUMBERS ═══════════ -->
+<div class="nums reveal">
+  <div class="num-cell"><div class="num-v">9<sup>+</sup></div><div class="num-l">Лет в продукте</div></div>
+  <div class="num-cell"><div class="num-v">45<sup>+</sup></div><div class="num-l">Потоков студентов</div></div>
+  <div class="num-cell"><div class="num-v">2M<sup>+</sup></div><div class="num-l">MAU под управлением</div></div>
+  <div class="num-cell"><div class="num-v">3</div><div class="num-l">Топовых вуза сейчас</div></div>
+</div>
+
+<!-- ═══════════ AI BLOCK ═══════════ -->
+<div id="ai">
+  <div class="ai-l reveal">
+    <div class="eyebrow">Дифференциатор</div>
+    <h2>ИИ — это не тренд. Это то, как теперь делается продукт.</h2>
+    <p>Вайбкодинг, no-code прототипирование, AI-ассистенты в разработке — использую каждый день и обучаю этому команды. На одном занятии собираю рабочий прототип идеи участника за 90 минут — без разработчика, без бюджета.</p>
+    <div class="ai-demo">«За одно занятие — от идеи до кликабельного прототипа. Без найма разработчика, без потраченного бюджета.»</div>
+  </div>
+  <div class="ai-r reveal reveal-d1">
+    <div class="eyebrow">Инструменты в работе</div>
+    <div class="tool-row"><span class="tool-n">Cursor / GitHub Copilot</span><span class="tool-t">AI-assisted dev</span></div>
+    <div class="tool-row"><span class="tool-n">v0 / Lovable</span><span class="tool-t">UI без кода</span></div>
+    <div class="tool-row"><span class="tool-n">Bubble</span><span class="tool-t">No-code продукт</span></div>
+    <div class="tool-row"><span class="tool-n">Figma + AI плагины</span><span class="tool-t">Быстрый дизайн</span></div>
+    <div class="tool-row"><span class="tool-n">Notion AI / Claude</span><span class="tool-t">Документация, анализ</span></div>
+    <div class="tool-row"><span class="tool-n">Tally / Typeform</span><span class="tool-t">CustDev за вечер</span></div>
+  </div>
+</div>
+
+<!-- ═══════════ TEACHING ═══════════ -->
+<section id="teaching">
+  <div class="container">
+    <div class="teach-grid">
+      <div class="reveal">
+        <div class="eyebrow">Преподавание</div>
+        <h2 class="title">Теория работает,<br>только если её<br><em>проверяли руками</em></h2>
+        <div class="teach-copy">
+          <p>Преподаю, потому что это лучший способ структурировать опыт. И потому что управленцы заслуживают живых примеров, а не кейсов из учебников.</p>
+          <p>ВШЭ, MBA РАНХиГС, Московская бизнес-академия. Создала курс «Продуктовый менеджер» вместе с МФТИ — вышел на <strong>Coursera.</strong></p>
+          <p>В Нетологии за 4 года — <strong>45+ потоков</strong> по продуктовому менеджменту и маркетингу.</p>
+        </div>
+      </div>
+      <div class="edu-list reveal reveal-d1">
+        <div class="edu-row">
+          <div><div class="edu-title">ВШЭ — Школа инноватики</div><div class="edu-org">Курс «Продукт» / Предпринимательство</div></div>
+          <div class="edu-yr">сейчас</div>
+        </div>
+        <div class="edu-row">
+          <div><div class="edu-title">MBA РАНХиГС (ИБДА)</div><div class="edu-org">Digital-продукты и стартапы</div></div>
+          <div class="edu-yr">сейчас</div>
+        </div>
+        <div class="edu-row">
+          <div><div class="edu-title">Московская бизнес-академия</div><div class="edu-org">MBA — Продуктовый маркетолог</div></div>
+          <div class="edu-yr">сейчас</div>
+        </div>
+        <div class="edu-row">
+          <div><div class="edu-title">Нетология</div><div class="edu-org">Продуктовый менеджмент / маркетинг</div></div>
+          <div class="edu-yr">2020–2024</div>
+        </div>
+        <div class="edu-row">
+          <div><div class="edu-title">МФТИ × Coursera</div><div class="edu-org">Курс «Продуктовый менеджер» (соавтор)</div></div>
+          <div class="edu-yr">2022</div>
+        </div>
+        <div class="edu-row">
+          <div><div class="edu-title">Корпоративные программы</div><div class="edu-org">Лукойл + другие по запросу</div></div>
+          <div class="edu-yr">2021+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOR WHOM ═══════════ -->
+<section id="forwhom">
+  <div class="container">
+    <div class="fw-inner">
+      <div class="fw-left reveal">
+        <div class="eyebrow">Для кого</div>
+        <h2 class="title">Работаю<br>с теми, кто<br><em>строит всерьёз</em></h2>
+        <p>Не интересны тренинги ради галочки в KPI. Интересна работа там, где есть реальная задача, ответственный заказчик и желание получить результат — а не красивую презентацию.</p>
+        <div class="tag-cloud">
+          <span class="tag">Tech-компании</span>
+          <span class="tag">Финтех</span>
+          <span class="tag">B2B SaaS</span>
+          <span class="tag">Ритейл</span>
+          <span class="tag">FMCG</span>
+          <span class="tag">Промышленность</span>
+          <span class="tag">EdTech</span>
+          <span class="tag">Госсектор</span>
+        </div>
+      </div>
+      <div class="fw-list reveal reveal-d1">
+        <div class="fw-row">
+          <div class="fw-dash">—</div>
+          <div class="fw-text"><strong>CEO / собственник,</strong> который чувствует: продукт развивается не так быстро, как требует бизнес. Нет человека, который закрывает эту роль.</div>
+        </div>
+        <div class="fw-row">
+          <div class="fw-dash">—</div>
+          <div class="fw-text"><strong>CDO / CPO,</strong> которому нужен внешний честный взгляд — без корпоративной политики и необходимости быть правым.</div>
+        </div>
+        <div class="fw-row">
+          <div class="fw-dash">—</div>
+          <div class="fw-text"><strong>HR / L&D-директор,</strong> который ищет практика для обучения команды, а не академического лектора с теорией из книжки.</div>
+        </div>
+        <div class="fw-row">
+          <div class="fw-dash">—</div>
+          <div class="fw-text"><strong>Команда с идеей,</strong> которой нужно быстро проверить гипотезу: стоит ли тратить ресурсы на разработку — или нет.</div>
+        </div>
+        <div class="fw-row">
+          <div class="fw-dash">—</div>
+          <div class="fw-text"><strong>Корпоративный университет</strong> крупной компании, которому нужна программа с реальными инструментами, а не теорией из 2015-го.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section id="cta">
+  <div class="cta-blob"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="eyebrow reveal" style="justify-content:center;">Контакт</div>
+    <h2 class="title reveal reveal-d1" style="text-align:center;margin:1.25rem auto 1rem;max-width:680px;">
+      Обсудим<br>ваш <em>проект?</em>
+    </h2>
+    <p class="reveal reveal-d2" style="font-size:1rem;color:var(--dim);max-width:400px;margin:0 auto 48px;line-height:1.7;text-align:center;">
+      Расскажите задачу — первый разговор бесплатный. Договоримся о формате, сроках и ожидаемом результате.
+    </p>
+    <div class="reveal reveal-d2" style="text-align:center;">
+      <a href="https://t.me/IuliiaRybakova" target="_blank" class="cta-main">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.18-2.01 9.47c-.15.68-.54.84-1.09.52l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.21-3.03 5.51-4.97c.24-.21-.05-.33-.37-.12l-6.8 4.28-2.93-.91c-.64-.2-.65-.64.13-.95l11.43-4.41c.53-.19 1 .13.98.63z"/></svg>
+        Написать в Telegram
+      </a>
+    </div>
+    <div class="cta-sub reveal reveal-d3">
+      <a href="https://t.me/IuliiaRybakova" target="_blank">@IuliiaRybakova</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:j.rybakova@yandex.ru">j.rybakova@yandex.ru</a>
+      &nbsp;·&nbsp;
+      <a href="https://t.me/ponyonpythone" target="_blank">Канал @ponyonpythone</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <span class="ft-name">Юлия Рыбакова</span>
+  <div class="ft-links">
+    <a href="https://t.me/IuliiaRybakova" target="_blank">Telegram</a>
+    <a href="https://www.hse.ru/org/persons/1120208803" target="_blank">ВШЭ</a>
+    <a href="https://t.me/ponyonpythone" target="_blank">@ponyonpythone</a>
+  </div>
+  <span class="ft-copy">Москва · 2026</span>
+</footer>
+
+<script>
+// Scroll reveal
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
